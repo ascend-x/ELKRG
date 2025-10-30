@@ -1,0 +1,58 @@
+name: docker cross build
+on: [push, pull_request]
+
+# Notes:
+#
+# - There is harmless warning:
+#
+#     "[Warning] The requested image's platform (linux/arm64/v8) does not
+#     match the detected host platform (linux/amd64) and no specific
+#     platform was requested"
+#
+#   It's hard to remove, perhaps, because we using 'build' and not 'buildx',
+#   which requires more setup.
+#
+# - git clean is not necessarily on GA, but added so it's easier to copy-paste
+#   Dockerfile for manual runs.
+
+jobs:
+    cross:
+        runs-on: ubuntu-22.04
+        strategy:
+            fail-fast: false
+            matrix:
+                include:
+                    - image: arm64v8/ubuntu:jammy
+                      platform: linux/arm64
+                      run: apt-get -y update && apt-get install -y git file gcc make  libelf-dev linux-headers-generic
+                    - image: arm32v7/alt:latest
+                      platform: linux/arm/v7
+                      run: apt-get -y update && apt-get install -y git file gcc make  elfutils kernel-headers-modules-std-def
+                    - image: i386/ubuntu:bionic
+                      platform: linux/386
+                      run: apt-get -y update && apt-get install -y git file gcc make  libelf-dev linux-headers-generic
+                    - image: centos:7
+                      platform: linux/amd64
+                      run: |
+                          sed -i -e 's,^mirrorlist=,#,' \
+                                 -e 's,^#baseurl=http://mirror\.centos\.org/centos/\$releasever,baseurl=https://vault.centos.org/7.9.2009,' \
+                                /etc/yum.repos.d/CentOS-Base.repo && \
+                          yum install -y git file gcc make  kernel-devel kernel elfutils-libelf-devel
+        steps:
+            - uses: docker/setup-qemu-action@v2
+            - uses: actions/checkout@v3
+            - name: Create Dockerfile
+              run: |
+                  cat <<EOF >Dockerfile
+                  FROM ${{ matrix.image }}
+                  RUN ${{ matrix.run }}
+                  WORKDIR /src
+                  COPY . .
+                  RUN git clean -dxfq
+                  RUN gcc -v; cat /etc/os-release
+                  RUN make -j\$(nproc) KERNELRELEASE=\$(cd /lib/modules; ls)
+                  RUN file lkrg.ko
+                  EOF
+            - run: docker build --platform=${{ matrix.platform }} .
+
+# vim: sw=4

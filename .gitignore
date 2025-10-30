@@ -1,0 +1,26 @@
+# build files
+.tmp_versions
+Module.symvers
+modules.order
+*.cmd
+*.ko
+*.mod
+*.mod.c
+*.o.d
+*.o.ur-safe
+*.o
+.cache.mk
+
+# kcov
+*.gcno
+*.gcda
+
+# GNU Global
+GPATH
+GRTAGS
+GTAGS
+
+# mkosi
+.mkosi-*
+mkosi.cache
+image.raw*

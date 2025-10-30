@@ -1,0 +1,38 @@
+name: docker build
+on: [push, pull_request]
+
+jobs:
+    build:
+        runs-on: ubuntu-22.04
+        strategy:
+            fail-fast: false
+            matrix:
+                include:
+                    - image: almalinux:8
+                      run: yum install -y kernel-devel kernel gcc make elfutils-libelf-devel
+                    - image: rockylinux:8
+                      run: yum install -y kernel-devel kernel gcc make elfutils-libelf-devel
+                    - image: quay.io/centos/centos:stream9
+                      run: dnf install -y --nobest kernel-devel-matched gcc make
+                    - image: fedora:latest
+                      run: dnf install -y kernel-devel kernel gcc make elfutils-libelf-devel awk
+                    - image: alt:sisyphus
+                      run: |
+                          apt-get update && apt-get install -y gcc make libelf-devel update-kernel && \
+                          update-kernel -y -t mainline --headers --no-kernel
+                    - image: registry.opensuse.org/opensuse/tumbleweed
+                      run: zypper -n install -y gcc make kernel-default-devel awk
+                    - image: registry.opensuse.org/opensuse/leap
+                      run: zypper -n install -y gcc make kernel-default-devel tar gzip
+
+        container:
+            image: ${{ matrix.image }}
+            options: --security-opt seccomp=unconfined
+
+        steps:
+            - run: cat /etc/os-release
+            - run: ${{ matrix.run }}
+            - uses: actions/checkout@v3
+            - run: make -j$(nproc) KERNELRELEASE=$(cd /lib/modules; ls)
+
+# vim: sw=4

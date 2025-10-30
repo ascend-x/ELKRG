@@ -1,0 +1,36 @@
+# mkosi.default - Another way to run a test system with LKRG module.
+
+[Distribution]
+Distribution=ubuntu
+# Linux version per release:
+#   focal   - v5.4
+#   groovy  - v5.8
+#   hirsute - v5.11
+Release=hirsute
+
+[Output]
+Bootable=yes
+# 'no_timer_check' is old workaround to intermittent apic kernel panic in qemu.
+KernelCommandLine=no_timer_check panic=-1 oops=panic panic_on_warn softlockup_panic=1 ignore_loglevel root=LABEL=root
+# Separate initrd for possible debugging.
+WithUnifiedKernelImages=no
+
+[Partitions]
+# 2G was not enough for build with mainline kernels installs.
+RootSize=4G
+
+[Packages]
+BuildPackages=
+	diffutils
+	dkms
+	linux-virtual
+Packages=
+	sysvbanner
+	kmod
+
+[Host]
+QemuHeadless=yes
+
+[Validation]
+Password=
+Autologin=yes
