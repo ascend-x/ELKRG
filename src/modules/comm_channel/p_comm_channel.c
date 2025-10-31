@@ -1,19 +1,4 @@
-/*
- * pi3's Linux kernel Runtime Guard
- *
- * Component:
- *  - Communication channel - sysctl interface
- *
- * Notes:
- *  - Allow administrator of the system to interact with LKRG via sysctl interface
- *
- * Timeline:
- *  - Created: 26.X.2017
- *
- * Author:
- *  - Nandakishore
- *
- */
+
 
 #include "../../p_lkrg_main.h"
 

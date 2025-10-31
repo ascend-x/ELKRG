@@ -1,19 +1,4 @@
-/*
- * pi3's Linux kernel Runtime Guard
- *
- * Component:
- *  - Database submodule - middle layer for arch specific code
- *
- * Notes:
- *  - For now, it is only for x86
- *
- * Timeline:
- *  - Created: 26.VIII.2018
- *
- * Author:
- *  - Adam 'pi3' Zabrocki (http://pi3.com.pl)
- *
- */
+
 
 #include "../../../p_lkrg_main.h"
 

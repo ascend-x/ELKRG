@@ -1,30 +1,4 @@
-/*
- * pi3's Linux kernel Runtime Guard
- *
- * Component:
- *  - Database module
- *    => submodule for dumping IDT
- *
- * Notes:
- *  - IDT can be different per CPU which makes it quite complicated...
- *    We need to run 'dumping' function on each CPU individually
- *
- *  - Linux kernel defines different types of CPUs:
- *    => online CPUs
- *    => possible CPUs
- *    => present CPUs
- *    => active CPUs
- *
- *    We are going to run procedure only on 'active CPUs' and different
- *    procedure is checking if number of active CPUs changes over time...
- *
- * Timeline:
- *  - Created: 27.XI.2015
- *
- * Author:
- *  - Adam 'pi3' Zabrocki (http://pi3.com.pl)
- *
- */
+
 
 #include "../../../../p_lkrg_main.h"
 

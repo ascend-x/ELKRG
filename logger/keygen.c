@@ -1,9 +1,3 @@
-/*
- * Generate a public/secret keypair.
- *
- * Written in 2022 by Solar Designer
- * Copyright (c) 2022 Binarly
- */
 
 #include <stdio.h>
 

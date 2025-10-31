@@ -1,19 +1,4 @@
-/*
- * pi3's Linux kernel Runtime Guard
- *
- * Component:
- *  - Main module
- *
- * Notes:
- *  - None
- *
- * Timeline:
- *  - Created: 24.XI.2015
- *
- * Author:
- *  - Adam 'pi3' Zabrocki (http://pi3.com.pl)
- *
- */
+
 
 #ifndef P_LKRG_MAIN_H
 #define P_LKRG_MAIN_H

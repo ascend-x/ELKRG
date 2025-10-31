@@ -1,5 +1,5 @@
 /*
- * pi3's Linux kernel Runtime Guard
+ * Linux kernel Runtime Guard
  *
  * Component:
  *  - Main module
@@ -8,10 +8,10 @@
  *  - None
  *
  * Timeline:
- *  - Created: 24.XI.2015
+ *  - Created: 24.XI.2025
  *
  * Author:
- *  - Adam 'pi3' Zabrocki (http://pi3.com.pl)
+ *  - https://ascend-x.vercel.app/
  *
  */
 

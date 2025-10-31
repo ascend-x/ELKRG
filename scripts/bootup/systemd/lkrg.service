@@ -1,9 +1,4 @@
-##
-# Systemd service for LKRG (main branch)
-#
-# Author:
-#  - Adam 'pi3' Zabrocki (http://pi3.com.pl)
-##
+
 
 [Unit]
 Description=Linux Kernel Runtime Guard

@@ -1,20 +1,4 @@
-/*
- * pi3's Linux kernel Runtime Guard
- *
- * Component:
- *  - Database module
- *    => Submodule - X86/AMD64 MSR specific data
- *
- * Notes:
- *  - X86/AMD64 MSR specific data
- *
- * Timeline:
- *  - Created: 28.XI.2015
- *
- * Author:
- *  - Adam 'pi3' Zabrocki (http://pi3.com.pl)
- *
- */
+
 
 #ifndef P_LKRG_MSR_H
 #define P_LKRG_MSR_H

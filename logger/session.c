@@ -1,9 +1,3 @@
-/*
- * Process one client session (one TCP connection).
- *
- * Written in 2022 by Solar Designer
- * Copyright (c) 2022 Binarly
- */
 
 #include <stdlib.h> /* for getenv() */
 #include <stdio.h>
